@@ -45,7 +45,7 @@ const EventBlock = (props) => {
             
             {numberOfLines > 2 ? (
                 <View style={{ flexDirection: "row", justifyContent: "space-between", width: "95%" }}>
-                    <Text style={{ fontWeight: "bold" }}>
+                    <Text style={{ fontWeight: "bold", marginLeft: 5 }}>
                         {event.studentName}
                     </Text>
                     <Text style={styles.eventTimes} numberOfLines={1}>
@@ -56,7 +56,7 @@ const EventBlock = (props) => {
             {
                 event.type != "event" && (
                     <View style={{ flexDirection: "row", justifyContent: "space-between", width: "95%", marginTop: 5 }}>
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <View style={{ flexDirection: "row", alignItems: "center", marginLeft: 5}}>
                         <Image source={event.locationPin} style={{height: 16, width: 16, tintColor: "gray", marginTop: 5}} />
                             <Text style={{ ...styles.eventTimes, fontSize: 12, marginLeft: 5, width: "50%" }}
                             numberOfLines={1}
