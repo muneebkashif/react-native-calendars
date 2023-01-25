@@ -15,7 +15,7 @@ import EventBlock from './EventBlock';
 import NowIndicator from './NowIndicator';
 import useTimelineOffset from './useTimelineOffset';
 const Timeline = (props) => {
-    const { format24h = true, start = 0, end = 24, date = '', events, onEventPress, onBackgroundLongPress, onBackgroundLongPressOut, renderEvent, theme, scrollToFirst, scrollToNow, initialTime, showNowIndicator, scrollOffset, onChangeOffset, overlapEventsSpacing = 0, rightEdgeSpacing = 0, unavailableHours, unavailableHoursColor, eventTapped, numberOfDays = 1, timelineLeftInset = 0, blockDays } = props;
+    const { format24h = true, start = 0, end = 24, date = '', events, onEventPress, onOutOfOfficeLongPress, onBackgroundLongPress, onBackgroundLongPressOut, renderEvent, theme, scrollToFirst, scrollToNow, initialTime, showNowIndicator, scrollOffset, onChangeOffset, overlapEventsSpacing = 0, rightEdgeSpacing = 0, unavailableHours, unavailableHoursColor, eventTapped, numberOfDays = 1, timelineLeftInset = 0, blockDays } = props;
     const pageDates = useMemo(() => {
         return typeof date === 'string' ? [date] : date;
     }, [date]);
@@ -99,7 +99,7 @@ const Timeline = (props) => {
         {...scrollEvents}
 
     >
-        <TimelineHours start={start} end={end} date={pageDates[0]} format24h={format24h} styles={styles.current} unavailableHours={unavailableHours} unavailableHoursColor={unavailableHoursColor} onBackgroundLongPress={onBackgroundLongPress} onBackgroundLongPressOut={onBackgroundLongPressOut} width={width} numberOfDays={numberOfDays} timelineLeftInset={timelineLeftInset} blockDays={blockDays} />
+        <TimelineHours start={start} end={end} date={pageDates[0]} format24h={format24h} styles={styles.current} unavailableHours={unavailableHours} unavailableHoursColor={unavailableHoursColor} onOutOfOfficeLongPress={onOutOfOfficeLongPress} onBackgroundLongPress={onBackgroundLongPress} onBackgroundLongPressOut={onBackgroundLongPressOut} width={width} numberOfDays={numberOfDays} timelineLeftInset={timelineLeftInset} blockDays={blockDays} />
       {times(numberOfDays, renderTimelineDay)}
     </ScrollView>);
 };

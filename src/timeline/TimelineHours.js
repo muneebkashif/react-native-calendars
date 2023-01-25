@@ -1,14 +1,14 @@
 import range from 'lodash/range';
 import times from 'lodash/times';
 import React, { useCallback, useMemo, useRef } from 'react';
-import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, StyleSheet, TouchableHighlight } from 'react-native';
 import constants from '../commons/constants';
 import { buildTimeString, calcTimeByPosition, calcDateByPosition } from './helpers/presenter';
 import { buildUnavailableHoursBlocks, HOUR_BLOCK_HEIGHT } from './Packer';
 const dimensionWidth = constants.screenWidth;
 const EVENT_DIFF = 20;
 const TimelineHours = (props) => {
-    const { format24h, start = 0, end = 24, date, unavailableHours, unavailableHoursColor, styles, onBackgroundLongPress, onBackgroundLongPressOut, width, numberOfDays = 1, timelineLeftInset = 0, blockDays } = props;
+    const { format24h, start = 0, end = 24, date, unavailableHours, unavailableHoursColor, styles, onOutOfOfficeLongPress, onBackgroundLongPress, onBackgroundLongPressOut, width, numberOfDays = 1, timelineLeftInset = 0, blockDays } = props;
     const lastLongPressEventTime = useRef();
 
     // const offset = this.calendarHeight / (end - start);
@@ -54,29 +54,36 @@ const TimelineHours = (props) => {
             lastLongPressEventTime.current = undefined;
         }
     }, [onBackgroundLongPressOut, date]);
+    const handleOutOfOfficePress = useCallback(block => {
+        const startTime = block.top/HOUR_BLOCK_HEIGHT
+        const endTime = (block.top+block.height)/HOUR_BLOCK_HEIGHT
+        onOutOfOfficeLongPress?.(startTime, endTime, lastLongPressEventTime.current);
+      }, [onOutOfOfficeLongPress, date])
     return (<>
       <TouchableWithoutFeedback onLongPress={handleBackgroundPress} onPressOut={handlePressOut}>
         <View style={StyleSheet.absoluteFillObject}/>
         </TouchableWithoutFeedback>
         
-        {blockDaysBlocks.map(block => (<View style={[
-                styles.unavailableHoursBlock,
-                block,
-                unavailableHoursColor ? { backgroundColor: '#E8E6E6' } : undefined,
-            { left: timelineLeftInset },
-                {borderRadius: 10, borderColor: "#AFABAB", borderWidth: 2}
-        ]}>
-            <Text style={{color:"#808080", fontWeight: "bold", padding: 10, }}>
-                Out of office
-            </Text>
-            </View>))}
-
       {unavailableHoursBlocks.map(block => (<View style={[
                 styles.unavailableHoursBlock,
                 block,
                 unavailableHoursColor ? { backgroundColor: unavailableHoursColor } : undefined,
                 { left: timelineLeftInset }
             ]}></View>))}
+
+        {blockDaysBlocks.map((block) => (<TouchableHighlight activeOpacity={0.9} underlayColor={"#cea29770"} onLongPress={()=>handleOutOfOfficePress(block)} style={[
+            styles.unavailableHoursBlock,
+            block,
+            unavailableHoursColor ? { backgroundColor: '#cea29795' } : undefined,
+            { left: timelineLeftInset },
+            {borderRadius: 0, borderColor: "#cb8372", borderWidth: 0}
+          ]}>
+          <Text style={{color:"#82413099", fontSize: 16, fontWeight: "bold", textAlign: 'center', marginTop: 20}}>
+            Blocked
+          </Text>
+          </TouchableHighlight>))
+        }
+
 
       {hours.map(({ timeText, time }, index) => {
             return (<React.Fragment key={time} >
