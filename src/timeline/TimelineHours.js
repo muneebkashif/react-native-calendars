@@ -57,7 +57,7 @@ const TimelineHours = (props) => {
     const handleOutOfOfficePress = useCallback(block => {
         const startTime = block.top/HOUR_BLOCK_HEIGHT
         const endTime = (block.top+block.height)/HOUR_BLOCK_HEIGHT
-        onOutOfOfficeLongPress?.(startTime, endTime, lastLongPressEventTime.current);
+        onOutOfOfficeLongPress?.(startTime, endTime, date, lastLongPressEventTime.current);
       }, [onOutOfOfficeLongPress, date])
     return (<>
       <TouchableWithoutFeedback onLongPress={handleBackgroundPress} onPressOut={handlePressOut}>
