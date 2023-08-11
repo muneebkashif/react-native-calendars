@@ -46,7 +46,7 @@ const EventBlock = (props) => {
             {numberOfLines > 2 ? (
                 <View style={{ flexDirection: "row", justifyContent: "space-between", width: "95%" }}>
                     <Text style={{ fontWeight: "bold", marginLeft: 5 }}>
-                        {event.studentName}
+                        {event.studentName?? event?.eventName}
                     </Text>
                     <Text style={styles.eventTimes} numberOfLines={1}>
                         {new XDate(event.start).toString(formatTime)} - {new XDate(event.end).toString(formatTime)}
