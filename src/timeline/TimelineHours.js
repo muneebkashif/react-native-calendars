@@ -71,7 +71,7 @@ const TimelineHours = (props) => {
                 { left: timelineLeftInset }
             ]}></View>))}
 
-        {blockDaysBlocks.map((block) => (<TouchableHighlight activeOpacity={0.9} underlayColor={"#cea29770"} onLongPress={()=>handleOutOfOfficePress(block)} style={[
+        {/* {blockDaysBlocks.map((block) => (<TouchableHighlight activeOpacity={0.9} underlayColor={"#cea29770"} onLongPress={()=>handleOutOfOfficePress(block)} style={[
             styles.unavailableHoursBlock,
             block,
             unavailableHoursColor ? { backgroundColor: '#cea29795' } : undefined,
@@ -82,7 +82,7 @@ const TimelineHours = (props) => {
             Blocked
           </Text>
           </TouchableHighlight>))
-        }
+        } */}
 
 
       {hours.map(({ timeText, time }, index) => {
