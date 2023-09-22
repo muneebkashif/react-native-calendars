@@ -18,7 +18,8 @@ const EventBlock = props => {
       top: event.top,
       backgroundColor: event.color ? event.color : EVENT_DEFAULT_COLOR,
       borderLeftWidth: 5,
-      borderLeftColor:
+      borderWidth: 0,
+      borderColor:
         event.type == 'event'
           ? '#FFC600'
           : event.type == 'private lesson'
@@ -64,7 +65,7 @@ const EventBlock = props => {
                   </Text>
                 </View>
               </View>
-              <Text style={{fontWeight: 'bold', marginVertical: 5}}>Out-of-Office</Text>
+              <Text style={{fontWeight: 'bold', marginVertical: 5, color: '#3F4041'}}>Out-of-Office</Text>
               <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Text style={{fontWeight: '300', color: '#3F4041', fontSize: 12}}>
@@ -84,7 +85,9 @@ const EventBlock = props => {
                   </Text>
                 </View>
               </View>
-              <Text style={{fontWeight: 'bold', marginVertical: 5}}>{event.studentName ?? event?.eventName}</Text>
+              <Text style={{fontWeight: 'bold', marginVertical: 5, color: '#3F4041'}}>
+                {event.studentName ?? event?.eventName}
+              </Text>
               <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Text style={{fontWeight: '300', color: '#3F4041', fontSize: 12}}>Event</Text>
@@ -104,7 +107,9 @@ const EventBlock = props => {
                 <View style={{flexDirection: 'row', alignItems: 'center'}}></View>
               </View>
 
-              <Text style={{fontWeight: 'bold', marginVertical: 5}}>{event.studentName ?? event?.eventName}</Text>
+              <Text style={{fontWeight: 'bold', marginVertical: 5, color: '#3F4041'}}>
+                {event.studentName ?? event?.eventName}
+              </Text>
               <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Text style={{fontWeight: '300', color: '#3F4041', fontSize: 12}}>Event</Text>
@@ -134,7 +139,9 @@ const EventBlock = props => {
                 </View>
               </View>
 
-              <Text style={{fontWeight: 'bold', marginVertical: 5}}>{event.studentName ?? event?.eventName}</Text>
+              <Text style={{fontWeight: 'bold', marginVertical: 5, color: '#3F4041'}}>
+                {event.studentName ?? event?.eventName}
+              </Text>
               <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Text style={{fontWeight: '300', color: '#3F4041', fontSize: 12}}>Kruzee Lesson</Text>
@@ -162,7 +169,9 @@ const EventBlock = props => {
                 </View>
               </View>
 
-              <Text style={{fontWeight: 'bold', marginVertical: 5}}>{event.studentName ?? event?.eventName}</Text>
+              <Text style={{fontWeight: 'bold', marginVertical: 5, color: '#3F4041'}}>
+                {event.studentName ?? event?.eventName}
+              </Text>
               <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Text style={{fontWeight: '300', color: '#3F4041', fontSize: 12}}>Kruzee Road Test - G2</Text>
