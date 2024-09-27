@@ -13,7 +13,8 @@ import {
   ViewStyle,
   AccessibilityActionEvent,
   ColorValue,
-  Insets
+  Insets,
+  TextStyle
 } from 'react-native';
 import {formatNumbers, weekDayNames} from '../../dateutils';
 import styleConstructor from './style';
@@ -68,6 +69,7 @@ export interface CalendarHeaderProps {
   current?: string;
   /** Left inset for the timeline calendar header, default is 72 */
   timelineLeftInset?: number;
+  monthTextStyle?: StyleProp<TextStyle>;
 }
 
 const accessibilityActions = [
@@ -102,7 +104,8 @@ const CalendarHeader = forwardRef((props: CalendarHeaderProps, ref) => {
     importantForAccessibility,
     numberOfDays,
     current = '',
-    timelineLeftInset
+    timelineLeftInset,
+    monthTextStyle
   } = props;
   
   const numberOfDaysCondition = useMemo(() => {
@@ -206,7 +209,7 @@ const CalendarHeader = forwardRef((props: CalendarHeaderProps, ref) => {
       <Fragment>
         <Text
           allowFontScaling={false}
-          style={style.current.monthText}
+          style={[style.current.monthText, monthTextStyle]}
           testID={`${testID}.title`}
           {...webProps}
         >
