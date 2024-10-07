@@ -10,6 +10,7 @@ const EventBlock = props => {
   const numberOfLines = Math.floor(event.height / TEXT_LINE_HEIGHT);
   const formatTime = format24h ? 'HH:mm' : 'hh:mm TT';
   const formaDate = 'MMMM dS, yyyy';
+  const oneHourLesson = (new XDate(event?.end).getTime() - new XDate(event?.start).getTime()) / (1000 * 60 * 60);
   const eventStyle = useMemo(() => {
     return {
       left: event.left,
@@ -118,8 +119,22 @@ const EventBlock = props => {
               </View>
             </View>
           )}
+
           {event.type == 'lesson' && (
             <View style={{marginTop: -2, width: '95%', marginLeft: 5, height: '100%', justifyContent: 'space-around'}}>
+              {event?.status == 'Complete' && !event?.lessonSheetFilled && oneHourLesson >1 &&  // showng when lesson is more than 1 hours
+                <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: "5%"}}>
+                <Image
+                  source={require('./assets/alertRed.png')}
+                  style={{height: 15, width: 15, marginLeft: 3}}
+                  resizeMode="contain"
+                />
+                <Text style={{fontWeight: '400', color: '#3F4041', fontSize: 15, marginLeft: 3}}>
+                  Outstanding in-car report
+                </Text>
+              </View>
+              }
+
               <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Text style={{fontWeight: '300', color: '#3F4041', fontSize: 12}}>
@@ -139,9 +154,19 @@ const EventBlock = props => {
                 </View>
               </View>
 
-              <Text style={{fontWeight: 'bold', marginVertical: 5, color: '#3F4041'}}>
-                {event.studentName ?? event?.eventName}
-              </Text>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Text style={{fontWeight: 'bold', marginVertical: 5, color: '#3F4041'}}>
+                  {event.studentName ?? event?.eventName}
+                </Text>
+                {event?.status == 'Complete' && !event?.lessonSheetFilled && oneHourLesson ==1 && (
+                  <Image
+                    source={require('./assets/alertRed.png')}
+                    style={{height: 15, width: 15, marginLeft: 3}}
+                    resizeMode="contain"
+                  />
+                )}
+              </View>
+
               <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Text style={{fontWeight: '300', color: '#3F4041', fontSize: 12}}>Kruzee Lesson</Text>
