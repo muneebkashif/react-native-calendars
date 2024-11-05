@@ -28,7 +28,7 @@ const EventBlock = props => {
           : event.type == 'lesson'
           ? '#36A0CD'
           : event.type == 'road test'
-          ? '#FF6B48'
+          ? '#7460fb'
           : event.type == 'outOfOffice'
           ? '#C3907F'
           : '#fff'
@@ -37,6 +37,7 @@ const EventBlock = props => {
   const _onPress = useCallback(() => {
     onPress(index);
   }, [index, onPress]);
+
   return (
     <TouchableOpacity
       activeOpacity={0.9}
@@ -53,6 +54,7 @@ const EventBlock = props => {
         }
       ]}
     >
+      {/* {console.log('event end time :::>> ',event.end)} */}
       {renderEvent ? (
         renderEvent(event)
       ) : (
@@ -122,18 +124,20 @@ const EventBlock = props => {
 
           {event.type == 'lesson' && (
             <View style={{marginTop: -2, width: '95%', marginLeft: 5, height: '100%', justifyContent: 'space-around'}}>
-              {event?.status == 'Complete' && !event?.lessonSheetFilled && oneHourLesson >1 &&  // showng when lesson is more than 1 hours
-                <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: "5%"}}>
-                <Image
-                  source={require('./assets/alertRed.png')}
-                  style={{height: 15, width: 15, marginLeft: 3}}
-                  resizeMode="contain"
-                />
-                <Text style={{fontWeight: '400', color: '#3F4041', fontSize: 15, marginLeft: 3}}>
-                  Outstanding in-car report
-                </Text>
-              </View>
-              }
+              {event?.status == 'Completed' &&
+                !event?.lessonSheetFilled &&
+                oneHourLesson > 1 && ( // showng when lesson is more than 1 hours,   end time, current time s 1 ghnta zada ho then show alert
+                  <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: '5%'}}>
+                    <Image
+                      source={require('./assets/alertRed.png')}
+                      style={{height: 15, width: 15, marginLeft: 3}}
+                      resizeMode="contain"
+                    />
+                    <Text style={{fontWeight: '400', color: '#3F4041', fontSize: 15, marginLeft: 3}}>
+                      Outstanding in-car report
+                    </Text>
+                  </View>
+                )}
 
               <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -158,7 +162,7 @@ const EventBlock = props => {
                 <Text style={{fontWeight: 'bold', marginVertical: 5, color: '#3F4041'}}>
                   {event.studentName ?? event?.eventName}
                 </Text>
-                {event?.status == 'Complete' && !event?.lessonSheetFilled && oneHourLesson ==1 && (
+                {event?.status == 'Completed' && !event?.lessonSheetFilled && oneHourLesson == 1 && (
                   <Image
                     source={require('./assets/alertRed.png')}
                     style={{height: 15, width: 15, marginLeft: 3}}
@@ -186,25 +190,41 @@ const EventBlock = props => {
           )}
           {event.type == 'road test' && (
             <View style={{marginTop: -2, width: '95%', marginLeft: 5, height: '100%', justifyContent: 'space-around'}}>
-              <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
+              {/* <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Text style={{fontWeight: '300', color: '#3F4041', fontSize: 12}}>
                     {new XDate(event.start).toString(formatTime)} - {new XDate(event.end).toString(formatTime)}
                   </Text>
                 </View>
-              </View>
+              </View> */}
 
+              {event?.status == 'Completed' &&
+                !event?.lessonSheetFilled &&
+                oneHourLesson > 1 && ( // showng when lesson is more than 1 hours,   end time, current time s 1 ghnta zada ho then show alert
+                  <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: '5%'}}>
+                    <Image
+                      source={require('./assets/alertRed.png')}
+                      style={{height: 15, width: 15}}
+                      resizeMode="contain"
+                    />
+                    <Text style={{fontWeight: '300', color: '#3F4041', fontSize: 12, marginLeft: 3}}>
+                      Outstanding in-car report
+                    </Text>
+                  </View>
+                )}
               <Text style={{fontWeight: 'bold', marginVertical: 5, color: '#3F4041'}}>
                 {event.studentName ?? event?.eventName}
               </Text>
               <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Text style={{fontWeight: '300', color: '#3F4041', fontSize: 12}}>Kruzee Road Test - G2</Text>
+                  <Text style={{fontWeight: '300', color: '#3F4041', fontSize: 12}}>
+                    Kruzee Road Test - {event?.roadTestType}
+                  </Text>
                 </View>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image
                     source={require('./assets/location.png')}
-                    style={{height: 15, width: 15, marginRight: 3, tintColor: '#3F4041'}}
+                    style={{height: 15, width: 15, tintColor: '#3F4041'}}
                     resizeMode="contain"
                   />
                   <Text numberOfLines={1} style={{fontWeight: '300', color: '#3F4041', fontSize: 12, maxWidth: 100}}>
