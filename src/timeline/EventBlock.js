@@ -40,7 +40,7 @@ const EventBlock = props => {
 
   return (
     <TouchableOpacity
-      activeOpacity={0.9}
+    activeOpacity={0.85}
       onPress={_onPress}
       style={[
         styles.event,
@@ -54,7 +54,6 @@ const EventBlock = props => {
         }
       ]}
     >
-      {/* {console.log('event end time :::>> ',event.end)} */}
       {renderEvent ? (
         renderEvent(event)
       ) : (
@@ -133,7 +132,7 @@ const EventBlock = props => {
                       style={{height: 15, width: 15, marginLeft: 3}}
                       resizeMode="contain"
                     />
-                    <Text style={{fontWeight: '400', color: '#3F4041', fontSize: 15, marginLeft: 3}}>
+                    <Text style={{fontWeight: '300', color: '#3F4041', fontSize: 12, marginLeft: 3}}>
                       Outstanding in-car report
                     </Text>
                   </View>

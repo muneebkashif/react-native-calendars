@@ -87,14 +87,7 @@ const TimelineHours = props => {
           style={[
             styles.unavailableHoursBlock,
             block,
-
-            unavailableHoursColor
-              ? {
-                  backgroundColor: unavailableHoursColor,
-                  marginTop: unavailableHours[index].start.slice(3, 5) == '00' ? 0 : 20
-                }
-              : undefined,
-            // unavailableHoursColor ? {backgroundColor: unavailableHoursColor} : undefined,
+            unavailableHoursColor ? {backgroundColor: unavailableHoursColor} : undefined,
             {left: timelineLeftInset}
           ]}
         ></View>
